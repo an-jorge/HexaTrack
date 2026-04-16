@@ -105,6 +105,8 @@ class _HomePageState extends State<HomePage> {
   // AÇÕES
   // =============================
   void convert() {
+    FocusScope.of(context).unfocus(); // fecha teclado
+
     try {
       final result = hexToFwVersion(_controller.text);
 
@@ -159,6 +161,9 @@ class _HomePageState extends State<HomePage> {
                   children: [
                     TextField(
                       controller: _controller,
+                      textInputAction: TextInputAction.search,
+                      onSubmitted: (value) => convert(),
+                      onEditingComplete: convert,
                       decoration: const InputDecoration(
                         labelText: "HEX Firmware",
                         hintText: "Ex: 0916",
